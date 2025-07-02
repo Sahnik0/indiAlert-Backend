@@ -1,0 +1,151 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Google Earth Engine Results and Generated Files
+gee_results/
+*.png
+*.jpg
+*.jpeg
+*.tiff
+*.tif
+
+# Email and Authentication Sensitive Data
+email_config.json
+auth_tokens.json
+service_account.json
+credentials.json
+
+# Log Files
+*.log
+monitoring_log.txt
+alert_history.json
+
+# Temporary Files
+*.tmp
+*.temp
+*~
+.DS_Store
+Thumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System Files
+.DS_Store
+*.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Backup Files
+*.bak
+*.backup
+*.old
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Satellite Data Downloads
+satellite_data/
+imagery/
+downloads/
+
+# Email Attachments Export Directory
+exports/
+attachments/
+
+# Machine Learning Models (if any)
+*.pkl
+*.joblib
+*.h5
+*.hdf5
+
+# Large Data Files
+*.csv
+*.xlsx
+*.json
+data/
+
+# Configuration Files with Sensitive Info
+config.ini
+settings.json
+secrets.json
+
+# Google Cloud and Earth Engine
+.gee_credentials
+.google_credentials
+google-cloud-keyfile.json
+
+# Project Specific Exclusions
+alert_history.json
+monitoring_log.txt
+*_monitoring_*.png
+*_overlay_*.png
+*_before_*.png
+*_after_*.png
