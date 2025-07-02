@@ -1,0 +1,33 @@
+# Python Dependencies for Satellite Monitoring System
+# Core dependencies
+numpy==1.24.3
+pandas==2.0.3
+matplotlib==3.7.2
+Pillow==10.0.0
+requests==2.31.0
+
+# Jupyter and notebook dependencies
+jupyter==1.0.0
+jupyterlab==4.0.5
+notebook==7.0.2
+ipywidgets==8.0.7
+widgetsnbextension==4.0.8
+
+# Google Earth Engine and geospatial
+earthengine-api==0.1.365
+google-cloud-storage==2.10.0
+google-auth==2.22.0
+
+# Environment and configuration
+python-dotenv==1.0.0
+
+# Scheduling and automation
+schedule==1.2.0
+
+# Utilities
+tqdm==4.65.0
+psutil==5.9.5
+
+# Development and debugging
+ipython==8.14.0
+ipdb==0.13.13

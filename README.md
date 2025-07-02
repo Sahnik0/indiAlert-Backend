@@ -4,6 +4,61 @@ A comprehensive satellite monitoring system using Google Earth Engine for detect
 
 ## 🔧 Setup Instructions
 
+### Option 1: Docker Setup (Recommended)
+
+Docker provides an isolated, consistent environment for running the satellite monitoring system.
+
+#### Prerequisites
+- Docker and Docker Compose installed on your system
+- At least 4GB RAM available for the container
+
+#### Quick Start with Docker
+
+1. Clone or download the project files
+2. Copy the environment template:
+   ```bash
+   cp .env.example .env
+   ```
+3. Edit the `.env` file with your credentials:
+   ```bash
+   nano .env
+   ```
+4. Start the system:
+   ```bash
+   ./docker-manage.sh start
+   ```
+5. Access Jupyter Lab at: http://localhost:8888
+
+#### Docker Management Commands
+
+```bash
+# Start the system
+./docker-manage.sh start
+
+# Stop the system
+./docker-manage.sh stop
+
+# View logs
+./docker-manage.sh logs
+
+# Access container shell
+./docker-manage.sh shell
+
+# Check system status
+./docker-manage.sh status
+
+# Create backup
+./docker-manage.sh backup
+
+# Restore from backup
+./docker-manage.sh restore <backup_filename>
+
+# Clean up resources
+./docker-manage.sh cleanup
+```
+
+### Option 2: Manual Setup
+
 ### 1. Environment Configuration
 
 1. Copy the sample environment file:
@@ -93,16 +148,44 @@ Adjust detection sensitivity in `.env`:
 
 ```
 IndiAlert Backend/
-├── Change_Monitoring.ipynb    # Main monitoring notebook
-├── .env                       # Your credentials (DO NOT COMMIT)
-├── .env.example              # Sample environment file
-├── .gitignore                # Git ignore rules
-├── README.md                 # This file
-└── gee_results/              # Generated images and logs
-    ├── monitoring_log.txt
-    ├── alert_history.json
-    └── *.png                 # Satellite imagery
+├── Change_Monitoring.ipynb      # Main monitoring notebook
+├── .env                         # Your credentials (DO NOT COMMIT)
+├── .env.example                # Sample environment file
+├── .gitignore                  # Git ignore rules
+├── .dockerignore               # Docker ignore rules
+├── README.md                   # This file
+├── Dockerfile                  # Docker container configuration
+├── docker-compose.yml          # Docker services configuration
+├── requirements.txt            # Python dependencies
+├── docker-manage.sh            # Docker management script
+├── nginx.conf                  # Nginx configuration for production
+├── backups/                    # System backups
+├── gee_results/                # Generated images and logs
+│   ├── monitoring_log.txt
+│   ├── alert_history.json
+│   └── *.png                   # Satellite imagery
+└── data/                       # Persistent data storage
 ```
+
+## 🐳 Docker Features
+
+- **Isolated Environment**: Complete Python environment with all dependencies
+- **Persistent Storage**: Data and results are preserved between container restarts
+- **Easy Management**: Simple commands for start/stop/backup operations
+- **Production Ready**: Includes Nginx reverse proxy configuration
+- **Health Monitoring**: Built-in health checks for container status
+- **Backup System**: Automated backup and restore functionality
+
+## 📊 Container Services
+
+### Main Services
+- **satellite-monitoring**: Main Jupyter Lab container
+- **nginx**: Reverse proxy (optional, for production)
+
+### Volumes
+- **satellite_results**: Stores generated images and detection results
+- **satellite_data**: Persistent data storage
+- **Current directory**: Mounted for live code editing
 
 ## 🛠️ Troubleshooting
 

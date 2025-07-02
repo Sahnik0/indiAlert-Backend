@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  satellite-monitoring:
+    build: .
+    container_name: satellite_monitoring_system
+    ports:
+      - "8888:8888"
+    volumes:
+      # Mount the current directory to /app in container
+      - .:/app
+      # Mount a persistent volume for results
+      - satellite_results:/app/gee_results
+      # Mount a volume for data persistence
+      - satellite_data:/app/data
+    environment:
+      # Load environment variables from .env file
+      - PROJECT_ID=${PROJECT_ID}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
+      - CURRENT_USER=${CURRENT_USER}
+      - EMAIL_COOLDOWN=${EMAIL_COOLDOWN}
+      - MONITORING_INTERVAL=${MONITORING_INTERVAL}
+      - NDVI_CHANGE_THRESHOLD=${NDVI_CHANGE_THRESHOLD}
+      - MNDWI_CHANGE_THRESHOLD=${MNDWI_CHANGE_THRESHOLD}
+      - NDBI_CHANGE_THRESHOLD=${NDBI_CHANGE_THRESHOLD}
+      - MIN_AREA_PIXELS=${MIN_AREA_PIXELS}
+      - CLOUD_COVER_LIMIT=${CLOUD_COVER_LIMIT}
+      - CONFIDENCE_THRESHOLD=${CONFIDENCE_THRESHOLD}
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add a reverse proxy for production
+  nginx:
+    image: nginx:alpine
+    container_name: monitoring_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - satellite-monitoring
+    networks:
+      - monitoring_network
+    profiles:
+      - production
+
+volumes:
+  satellite_results:
+    driver: local
+  satellite_data:
+    driver: local
+
+networks:
+  monitoring_network:
+    driver: bridge
