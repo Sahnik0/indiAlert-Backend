@@ -106,10 +106,13 @@ Desktop.ini
 *.backup
 *.old
 
-# Environment Variables
+# Environment Variables - CRITICAL: Never commit these files
 .env
 .env.local
 .env.*.local
+.env.production
+.env.development
+.env.test
 
 # Satellite Data Downloads
 satellite_data/
